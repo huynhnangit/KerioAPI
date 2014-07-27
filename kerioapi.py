@@ -13,7 +13,6 @@ class KerioAPI:
 	
 ####
 	def sendRequest(self, data, headers):
-		#uri="https://103.20.148.75:4040/admin/api/jsonrpc/"
 		uri = "https://" + self.ip + ":" + self.port + "/admin/api/jsonrpc/"
 		r = requests.post(uri, data, headers=headers, verify=False)
 		
@@ -41,7 +40,7 @@ class KerioAPI:
 				"params": {"username": self.user,
 							"password": self.passwd,
 							"application": {"name": "Huynh Nang",
-											"vendor": "HTN Corp",
+											"vendor": "VONLINE",
 											"version": "1.0.0"}}}
 		# login headers
 		login_size = len(login)
@@ -223,20 +222,6 @@ class KerioAPI:
 		
 		return isOK
 
-####
-#def Setting():
-#	global setcookie
-#	global settoken
-#	
-#####
-#if __name__ == "__main__":
-#	#Setting()
-#	if login():
-#		#createUser("Huynh Nang", "htn", "123456", "htn.com")
-#		#updatePassword("nang","123456", "htn.com")
-#		#enableUser("nang", "htn.com")
-#		disableUser("nang", "htn.com")
-#		logout()
 
 
 
