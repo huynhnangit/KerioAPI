@@ -55,7 +55,7 @@ class KerioAPI:
 		}
 	
 		data=json.dumps(login)
-		r = sendRequest(data, headers)
+		r = self.sendRequest(data, headers)
 		isOK = False
 		if r:
 			cookie1 = r.cookies["Session_admin80"]
@@ -80,7 +80,7 @@ class KerioAPI:
 		}
 		data_size = len(getDomain)
 		data = json.dumps(getDomain)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		domainID = ''
 		if r:
 			idd = json.loads(r.text)
@@ -90,7 +90,7 @@ class KerioAPI:
 	
 	####
 	def getUserID(self, username, domain):
-		domainID = getDomainID(domain)
+		domainID = self.getDomainID(domain)
 		getUser = {
 			"jsonrpc":"2.0","id":1,
 			"method":"Users.get",
@@ -98,7 +98,7 @@ class KerioAPI:
 		}
 		data_size = len(getUser)
 		data = json.dumps(getUser)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		userID = ''
 		if r:
 			idd = json.loads(r.text)
@@ -109,7 +109,7 @@ class KerioAPI:
 	
 	####
 	def updatePassword(self, username, newpassword, domain):
-		userID = getUserID(username, domain)
+		userID = self.getUserID(username, domain)
 		updatePassword = {
 			"jsonrpc":"2.0","id":1,
 			"method":"Users.set",
@@ -119,7 +119,7 @@ class KerioAPI:
 				
 		data_size = len(updatePassword)
 		data = json.dumps(updatePassword)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
 			print r.text
@@ -129,7 +129,7 @@ class KerioAPI:
 	
 	####
 	def createUser(self, fullname, username, password, domain):
-		domainID = getDomainID(domain)
+		domainID = self.getDomainID(domain)
 		createUser = {
 			"jsonrpc": "2.0",
 			"id": 1,
@@ -145,7 +145,7 @@ class KerioAPI:
 		}
 		data_size = len(createUser)
 		data = json.dumps(createUser)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
 			print r.text
@@ -155,7 +155,7 @@ class KerioAPI:
 	
 	####
 	def removeUser(self, username, domain):
-		userID = getUserID(username, domain)
+		userID = self.getUserID(username, domain)
 		removeUser = {
 			"jsonrpc":"2.0","id":1,"method":"Users.remove",
 			"params":{"requests":[{"userId":userID,
@@ -163,7 +163,7 @@ class KerioAPI:
 		}
 		data_size = len(removeUser)
 		data = json.dumps(removeUser)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
 			print r.text
@@ -173,14 +173,14 @@ class KerioAPI:
 	
 	####
 	def enableUser(self, username, domain):
-		userID = getUserID(username, domain)
+		userID = self.getUserID(username, domain)
 		enableUser = {
 			"jsonrpc":"2.0","id":1,"method":"Users.set",
 			"params":{"userIds":[userID],"pattern":{"isEnabled":True}}
 		}
 		data_size = len(enableUser)
 		data = json.dumps(enableUser)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
 			print r.text
@@ -190,14 +190,14 @@ class KerioAPI:
 		
 	####
 	def disableUser(self, username, domain):
-		userID = getUserID(username, domain)
+		userID = self.getUserID(username, domain)
 		disableUser = {
 			"jsonrpc":"2.0","id":1,"method":"Users.set",
 			"params":{"userIds":[userID],"pattern":{"isEnabled":False}}
 		}
 		data_size = len(disableUser)
 		data = json.dumps(disableUser)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
 			print r.text
@@ -214,22 +214,10 @@ class KerioAPI:
 			}
 		data_size = len(logout)
 		data = json.dumps(logout)
-		r = sendRequest(data, createHeader(data_size))
+		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
 			print r.text
 			isOK = True
 		
 		return isOK
-
-
-
-
-
-
-
-
-
-
-
-
