@@ -15,7 +15,9 @@ class KerioAPI:
 	def sendRequest(self, data, headers):
 		uri = "https://" + self.ip + ":" + self.port + "/admin/api/jsonrpc/"
 		r = requests.post(uri, data, headers=headers, verify=False)
-		
+		if not r:
+			writeLog("INFO: ", "Can't connect to kerio api, please check !")
+		#
 		return r
 	
 	####
@@ -29,19 +31,26 @@ class KerioAPI:
 			"X-Token" : settoken,
 			"Cookie" : setcookie
 		}
+		#
 		return headers
 	
 	####
 	def login(self):
 		# login json
-		login = {"jsonrpc": "2.0",
-				"id": 1,
-				"method": "Session.login",
-				"params": {"username": self.user,
-							"password": self.passwd,
-							"application": {"name": "Huynh Nang",
-											"vendor": "VONLINE",
-											"version": "1.0.0"}}}
+		login = {
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "Session.login",
+			"params": {
+				"username": self.user,
+				"password": self.passwd,
+				"application": {
+					"name": "Huynh Nang",
+					"vendor": "VONLINE",
+					"version": "1.0.0"
+				}
+			}
+		}
 		# login headers
 		login_size = len(login)
 		headers = {
@@ -66,7 +75,10 @@ class KerioAPI:
 			global settoken
 			settoken = token['result']['token']
 			isOK = True
-			
+			writeLog("INFO: ", r.text)
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
 			
 		
@@ -85,7 +97,10 @@ class KerioAPI:
 		if r:
 			idd = json.loads(r.text)
 			domainID = idd['result']['list'][0]['id']
-		
+			writeLog("INFO: ", r.text)
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return domainID
 	
 	####
@@ -103,7 +118,10 @@ class KerioAPI:
 		if r:
 			idd = json.loads(r.text)
 			userID = idd['result']['list'][0]['id']
-		
+			writeLog("INFO: ", r.text)
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return userID
 	
 	
@@ -122,9 +140,12 @@ class KerioAPI:
 		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
-			print r.text
+			#print r.text
+			writeLog("INFO: ", r.text)
 			isOK = True
-		
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
 	
 	####
@@ -134,23 +155,27 @@ class KerioAPI:
 			"jsonrpc": "2.0",
 			"id": 1,
 			"method": "Users.create",
-			"params":{"users":[{"loginName":username,"description":"","hasDefaultSpamRule":True,
-								"publishInGal":True,"authType":0,"isPasswordReversible":True,"isEnabled":True,
-								"domainId":domainID,"hasDomainRestriction":False,"password":password,
-								"role":{"userRole":0,"publicFolderRight":False,"archiveFolderRight":False},"itemLimit":{"isActive":False,"limit":0},
-								"diskSizeLimit":{"isActive":False,"limit":{"value":0,"units":2}},"outMessageLimit":{"isActive":False,"limit":{"value":"","units":2}},
-								"cleanOutItems":{"isUsedDomain":True,"deletedItems":{"isEnabled":False,"days":30},"junkEmail":{"isEnabled":False,"days":30},
-								"sentItems":{"isEnabled":False,"days":30},"autoDelete":{"isEnabled":False,"days":1095}},"fullName":fullname,
-								"emailForwarding":{"mode":0,"emailAddresses":[]},"emailAddresses":[],"userGroups":[]}]}
+			"params":{
+				"users":[{
+					"loginName":username,"description":"","hasDefaultSpamRule":True,"publishInGal":True,"authType":0,"isPasswordReversible":True,"isEnabled":True,
+					"domainId":domainID,"hasDomainRestriction":False,"password":password,"role":{"userRole":0,"publicFolderRight":False,"archiveFolderRight":False},"itemLimit":{"isActive":False,"limit":0},
+					"diskSizeLimit":{"isActive":False,"limit":{"value":0,"units":2}},"outMessageLimit":{"isActive":False,"limit":{"value":"","units":2}},
+					"cleanOutItems":{"isUsedDomain":True,"deletedItems":{"isEnabled":False,"days":30},"junkEmail":{"isEnabled":False,"days":30},
+					"sentItems":{"isEnabled":False,"days":30},"autoDelete":{"isEnabled":False,"days":1095}},"fullName":fullname,"emailForwarding":{"mode":0,"emailAddresses":[]},"emailAddresses":[],"userGroups":[]
+				}]
+			}
 		}
 		data_size = len(createUser)
 		data = json.dumps(createUser)
 		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
-			print r.text
+			#print r.text
+			writeLog("INFO: ", r.text)
 			isOK = True
-		
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
 	
 	####
@@ -166,9 +191,12 @@ class KerioAPI:
 		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
-			print r.text
+			#print r.text
+			writeLog("INFO: ", r.text)
 			isOK = True
-		
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
 	
 	####
@@ -183,9 +211,12 @@ class KerioAPI:
 		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
-			print r.text
+			#print r.text
+			writeLog("INFO: ", r.text)
 			isOK = True
-		
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
 		
 	####
@@ -200,9 +231,12 @@ class KerioAPI:
 		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
-			print r.text
+			#print r.text
+			writeLog("INFO: ", r.text)
 			isOK = True
-		
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
 	
 	####
@@ -211,13 +245,29 @@ class KerioAPI:
 			"jsonrpc": "2.0",
 			"id": 1,
 			"method": "Session.logout"
-			}
+		}
 		data_size = len(logout)
 		data = json.dumps(logout)
 		r = self.sendRequest(data, self.createHeader(data_size))
 		isOK = False
 		if r:
-			print r.text
+			#print r.text
+			writeLog("INFO: ", r.text)
 			isOK = True
-		
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+		#
 		return isOK
+	
+	####
+	def writeLog(self, prefix, content):
+		logPath = '/var/log/kerioapi.log'
+		try:
+			fo = open(logPath, 'a')
+			now = datetime.now()
+			nowFormat = now.strftime('%Y/%m/%d %H:%M:%S')
+			fo.writelines(nowFormat + "\t" + prefix + content + "\n")
+		except IOError, e:
+			pass
+		finally:
+			fo.close()
