@@ -16,7 +16,11 @@ class KerioAPI:
 		uri = "https://" + self.ip + ":" + self.port + "/admin/api/jsonrpc/"
 		r = requests.post(uri, data, headers=headers, verify=False)
 		if not r:
+<<<<<<< HEAD
 			self.writeLog("INFO: ", "Can't connect to kerio api, please check !")
+=======
+			writeLog("INFO: ", "Can't connect to kerio api, please check !")
+>>>>>>> origin/master
 		#
 		return r
 	
@@ -75,9 +79,15 @@ class KerioAPI:
 			global settoken
 			settoken = token['result']['token']
 			isOK = True
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 			
@@ -97,9 +107,15 @@ class KerioAPI:
 		if r:
 			idd = json.loads(r.text)
 			domainID = idd['result']['list'][0]['id']
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return domainID
 	
@@ -118,9 +134,15 @@ class KerioAPI:
 		if r:
 			idd = json.loads(r.text)
 			userID = idd['result']['list'][0]['id']
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return userID
 	
@@ -141,10 +163,17 @@ class KerioAPI:
 		isOK = False
 		if r:
 			#print r.text
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 			isOK = True
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+			isOK = True
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 	
@@ -171,10 +200,17 @@ class KerioAPI:
 		isOK = False
 		if r:
 			#print r.text
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 			isOK = True
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+			isOK = True
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 	
@@ -192,10 +228,17 @@ class KerioAPI:
 		isOK = False
 		if r:
 			#print r.text
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 			isOK = True
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+			isOK = True
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 	
@@ -212,10 +255,17 @@ class KerioAPI:
 		isOK = False
 		if r:
 			#print r.text
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 			isOK = True
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+			isOK = True
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 		
@@ -232,10 +282,17 @@ class KerioAPI:
 		isOK = False
 		if r:
 			#print r.text
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 			isOK = True
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+			isOK = True
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 	
@@ -252,10 +309,17 @@ class KerioAPI:
 		isOK = False
 		if r:
 			#print r.text
+<<<<<<< HEAD
 			self.writeLog("INFO: ", r.text)
 			isOK = True
 		else:
 			self.writeLog("INFO: ", "Can't send request to kerio api")
+=======
+			writeLog("INFO: ", r.text)
+			isOK = True
+		else:
+			writeLog("INFO: ", "Can't send request to kerio api")
+>>>>>>> origin/master
 		#
 		return isOK
 	
@@ -270,4 +334,8 @@ class KerioAPI:
 		except IOError, e:
 			pass
 		finally:
+<<<<<<< HEAD
 			fo.close()
+=======
+			fo.close()
+>>>>>>> origin/master
